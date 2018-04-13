@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 设置包的扫描 -->
+    <context:component-scan base-package="com.hzhiping.*">
+    	
+    </context:component-scan>
+	<!-- 设置数据库的连接池 -->
+	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/graduation?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<!-- 设置jdbcTempalte模板的bean，其中注入我们的地址 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 设置goodsDaoImpl实现类的bean -->
+<!-- 	<bean name="goodsDaoImpl" class="com.hzhiping.dao.impl.GoodsDaoImpl">
+	</bean> -->
+	<!-- 设置goodsServiceImpl实现类的bean -->
+<!-- 	<bean name="goodsServiceImpl" class="com.hzhiping.service.impl.GoodsServiceImpl">
+		<property name="goodsDaoImpl" ref="goodsDaoImpl"></property>
+	</bean> -->
+	<!-- 设置爬虫调度器的bean，并且在其中注入我们的service层 -->
+<!-- 	<bean name="spiderHandler" class="com.hzhiping.handler.SpiderHandler">
+		<property name="goodsServiceImpl" ref="goodsServiceImpl"></property>
+	</bean> -->
+</beans>
